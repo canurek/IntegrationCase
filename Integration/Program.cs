@@ -7,18 +7,11 @@ public abstract class Program
     public static void Main(string[] args)
     {
         var service = new ItemIntegrationService();
-        
-        ThreadPool.QueueUserWorkItem(_ => service.SaveItem("a"));
-        ThreadPool.QueueUserWorkItem(_ => service.SaveItem("b"));
-        ThreadPool.QueueUserWorkItem(_ => service.SaveItem("c"));
 
-        Thread.Sleep(500);
+        var itemsToSave = new string[] { "a", "b", "c", "a", "b", "c" };
 
-        ThreadPool.QueueUserWorkItem(_ => service.SaveItem("a"));
-        ThreadPool.QueueUserWorkItem(_ => service.SaveItem("b"));
-        ThreadPool.QueueUserWorkItem(_ => service.SaveItem("c"));
-
-        Thread.Sleep(5000);
+        //It's easy to demonstrate working parallelly like that.
+        Parallel.ForEach(itemsToSave, item => service.SaveItem(item));
 
         Console.WriteLine("Everything recorded:");
 

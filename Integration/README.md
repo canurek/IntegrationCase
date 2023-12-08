@@ -33,3 +33,14 @@ Although protection is in place to check for duplicate items, if called rapidly 
 
 **b: Weaknesses:**
 - Identify and describe any weaknesses that the solution might have in a text file.
+
+### Comments for the Distributed System Scenario
+
+If we decide to work in a distributed system and create multiple instances for the same service,
+we will probably use a message broker. It's a common scenario. 
+
+But it doesn't mean we can prevent duplicate processing by that. We can handle this by distributed locking.
+But in this case, other problems can occur, like performance, SPF, what will happen if the service fails, etc. 
+
+Everything become more complex in distributed systems, and all of these things should handled carefully.
+
